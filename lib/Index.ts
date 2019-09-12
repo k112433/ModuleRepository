@@ -14,7 +14,7 @@ export default class LoggerHelper {
     this._appConstants = AppConstants.Instance();
   }
 
-  public Log(item: ILogger) {
+  public static Log(item: ILogger) {
     if (AppConstants) {
       if (AppConstants.ListName) {
         sp.web.lists
@@ -29,7 +29,7 @@ export default class LoggerHelper {
     }
   }
 
-  public Initalize(listName: any) {
+  public static Initalize(listName: any) {
     AppConstants.ListName = listName;
     // Processing for If List Exist or Not
   }
