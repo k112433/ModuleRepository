@@ -1,6 +1,6 @@
 import * as pluralize from "pluralize";
 import { sp } from "sp-pnp-js";
-import { AppConstants } from "../lib/AppConstants";
+
 /**
  * @Method: Returns the plural form of any noun.
  * @Param {string}cls
@@ -14,7 +14,7 @@ export default class LoggerHelper {
     this._appConstants = AppConstants.Instance();
   }
 
-  public static Log(item: ILogger) {
+  public Log(item: ILogger) {
     if (AppConstants) {
       if (AppConstants.ListName) {
         sp.web.lists
@@ -29,7 +29,7 @@ export default class LoggerHelper {
     }
   }
 
-  public static Initalize(listName: any) {
+  public Initalize(listName: any) {
     AppConstants.ListName = listName;
     // Processing for If List Exist or Not
   }
@@ -46,4 +46,28 @@ export interface ILogger {
   JSON?: string;
   ProgrammeID?: number;
   StatusCode?: number;
+}
+
+export class AppConstants {
+  private static _instance: AppConstants;
+
+  private static _listName: string;
+
+  //private static foo: ProjectsCrud = new ProjectsCrud(null);
+
+  public static Instance() {
+    // Do you need arguments? Make it a regular static method instead.
+
+    return this._instance || (this._instance = new this());
+  }
+  public static get ListName(): string {
+    return this._listName;
+  }
+  public static set ListName(_listName: string) {
+    this._listName = _listName;
+  }
+
+  public constructor() {
+    //...
+  }
 }

@@ -11,7 +11,7 @@ var LoggerHelper = /** @class */ (function () {
     function LoggerHelper() {
         this._appConstants = AppConstants_1.AppConstants.Instance();
     }
-    LoggerHelper.prototype.Log = function (item) {
+    LoggerHelper.Log = function (item) {
         if (AppConstants_1.AppConstants) {
             if (AppConstants_1.AppConstants.ListName) {
                 sp_pnp_js_1.sp.web.lists
@@ -25,7 +25,7 @@ var LoggerHelper = /** @class */ (function () {
             }
         }
     };
-    LoggerHelper.prototype.Initalize = function (listName) {
+    LoggerHelper.Initalize = function (listName) {
         AppConstants_1.AppConstants.ListName = listName;
         // Processing for If List Exist or Not
     };
