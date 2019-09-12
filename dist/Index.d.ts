@@ -7,8 +7,8 @@ export default class LoggerHelper {
     private _appConstants;
     static listName: string;
     constructor();
-    static Log(item: ILogger): void;
-    static Initalize(listName: any): void;
+    Log(item: ILogger): void;
+    Initalize(listName: any): void;
 }
 export interface ILogger {
     PageURL?: string;
@@ -21,4 +21,11 @@ export interface ILogger {
     JSON?: string;
     ProgrammeID?: number;
     StatusCode?: number;
+}
+export declare class AppConstants {
+    private static _instance;
+    private static _listName;
+    static Instance(): AppConstants;
+    static ListName: string;
+    constructor();
 }

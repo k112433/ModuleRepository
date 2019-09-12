@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var sp_pnp_js_1 = require("sp-pnp-js");
-var AppConstants_1 = require("../lib/AppConstants");
 /**
  * @Method: Returns the plural form of any noun.
  * @Param {string}cls
@@ -9,13 +8,13 @@ var AppConstants_1 = require("../lib/AppConstants");
  */
 var LoggerHelper = /** @class */ (function () {
     function LoggerHelper() {
-        this._appConstants = AppConstants_1.AppConstants.Instance();
+        this._appConstants = AppConstants.Instance();
     }
-    LoggerHelper.Log = function (item) {
-        if (AppConstants_1.AppConstants) {
-            if (AppConstants_1.AppConstants.ListName) {
+    LoggerHelper.prototype.Log = function (item) {
+        if (AppConstants) {
+            if (AppConstants.ListName) {
                 sp_pnp_js_1.sp.web.lists
-                    .getByTitle(AppConstants_1.AppConstants.ListName)
+                    .getByTitle(AppConstants.ListName)
                     .items.add(item)
                     .then(function (res) { })
                     .catch(function (err) {
@@ -25,10 +24,32 @@ var LoggerHelper = /** @class */ (function () {
             }
         }
     };
-    LoggerHelper.Initalize = function (listName) {
-        AppConstants_1.AppConstants.ListName = listName;
+    LoggerHelper.prototype.Initalize = function (listName) {
+        AppConstants.ListName = listName;
         // Processing for If List Exist or Not
     };
     return LoggerHelper;
 }());
 exports.default = LoggerHelper;
+var AppConstants = /** @class */ (function () {
+    function AppConstants() {
+        //...
+    }
+    //private static foo: ProjectsCrud = new ProjectsCrud(null);
+    AppConstants.Instance = function () {
+        // Do you need arguments? Make it a regular static method instead.
+        return this._instance || (this._instance = new this());
+    };
+    Object.defineProperty(AppConstants, "ListName", {
+        get: function () {
+            return this._listName;
+        },
+        set: function (_listName) {
+            this._listName = _listName;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return AppConstants;
+}());
+exports.AppConstants = AppConstants;
