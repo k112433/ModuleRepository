@@ -46,8 +46,6 @@ var LoggerHelper = /** @class */ (function () {
         this._appConstants = AppConstants.Instance();
     }
     LoggerHelper.prototype.Log = function (item) {
-        console.log("Queue===> ", AppConstants.Queue);
-        console.log("List Created===> ", AppConstants.ListCreated);
         if (AppConstants) {
             if (AppConstants.ListName) {
                 if (AppConstants.ListCreated) {
@@ -66,51 +64,28 @@ var LoggerHelper = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                sp_pnp_js_1.sp.web.lists
-                    .add(AppConstants.ListName)
-                    .then(function (res) {
-                    Promise.all([
-                        sp_pnp_js_1.sp.web.lists
-                            .getByTitle(AppConstants.ListName)
-                            .fields.addMultilineText("PageURL"),
-                        sp_pnp_js_1.sp.web.lists
-                            .getByTitle(AppConstants.ListName)
-                            .fields.addText("FileName"),
-                        sp_pnp_js_1.sp.web.lists
-                            .getByTitle(AppConstants.ListName)
-                            .fields.addText("Method"),
-                        sp_pnp_js_1.sp.web.lists
-                            .getByTitle(AppConstants.ListName)
-                            .fields.addUser("User", 0),
-                        sp_pnp_js_1.sp.web.lists
-                            .getByTitle(AppConstants.ListName)
-                            .fields.addChoice("Extype", ["Info", "Error", "Warn"]),
-                        sp_pnp_js_1.sp.web.lists
-                            .getByTitle(AppConstants.ListName)
-                            .fields.addMultilineText("ErrorMessage"),
-                        sp_pnp_js_1.sp.web.lists
-                            .getByTitle(AppConstants.ListName)
-                            .fields.addMultilineText("ErrorDetails"),
-                        sp_pnp_js_1.sp.web.lists
-                            .getByTitle(AppConstants.ListName)
-                            .fields.addMultilineText("JSON"),
-                        sp_pnp_js_1.sp.web.lists
-                            .getByTitle(AppConstants.ListName)
-                            .fields.addNumber("ProgrammeID"),
-                        sp_pnp_js_1.sp.web.lists
-                            .getByTitle(AppConstants.ListName)
-                            .fields.addNumber("StatusCode")
-                    ])
-                        .then(function (res) {
-                        AppConstants.ListCreated = true;
-                        _this.CheckQueue();
-                    })
-                        .catch(function (err) {
-                        AppConstants.ListCreated = false;
-                    });
-                })
-                    .catch(function (err) { });
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, sp_pnp_js_1.sp.web.lists
+                            .add(AppConstants.ListName)
+                            .then(function (res) { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                console.log("List Created By the Rest Api");
+                                console.log(res, "res");
+                                alert("List Created");
+                                sp_pnp_js_1.sp.web.lists
+                                    .getByTitle(AppConstants.ListName)
+                                    .fields.addMultilineText("PageURL")
+                                    .then(function (res) {
+                                    alert("Multiline Added");
+                                });
+                                return [2 /*return*/];
+                            });
+                        }); })
+                            .catch(function (err) { })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -129,14 +104,17 @@ var LoggerHelper = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         AppConstants.ListName = listName;
+                        console.log("Initialize Called");
                         // Processing for If List Exist or Not
                         return [4 /*yield*/, sp_pnp_js_1.sp.web.lists.ensure(listName).then(function (value) {
                                 if (value.created) {
                                     console.log("List already Exist");
+                                    alert("List Already Exist");
                                     AppConstants.ListCreated = true;
                                 }
                                 else {
                                     AppConstants.ListCreated = false;
+                                    alert("Going to Create a List with this Name");
                                     console.log("Going to Create a List with this Name");
                                     _this.CreateList();
                                 }

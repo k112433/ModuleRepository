@@ -15,8 +15,6 @@ export default class LoggerHelper {
   }
 
   public Log(item: ILogger) {
-    console.log("Queue===> ", AppConstants.Queue);
-    console.log("List Created===> ", AppConstants.ListCreated);
     if (AppConstants) {
       if (AppConstants.ListName) {
         if (AppConstants.ListCreated) {
@@ -31,47 +29,17 @@ export default class LoggerHelper {
   }
 
   private async CreateList() {
-    sp.web.lists
+    await sp.web.lists
       .add(AppConstants.ListName)
-      .then(res => {
-        Promise.all([
-          sp.web.lists
-            .getByTitle(AppConstants.ListName)
-            .fields.addMultilineText("PageURL"),
-          sp.web.lists
-            .getByTitle(AppConstants.ListName)
-            .fields.addText("FileName"),
-          sp.web.lists
-            .getByTitle(AppConstants.ListName)
-            .fields.addText("Method"),
-          sp.web.lists
-            .getByTitle(AppConstants.ListName)
-            .fields.addUser("User", 0),
-          sp.web.lists
-            .getByTitle(AppConstants.ListName)
-            .fields.addChoice("Extype", ["Info", "Error", "Warn"]),
-          sp.web.lists
-            .getByTitle(AppConstants.ListName)
-            .fields.addMultilineText("ErrorMessage"),
-          sp.web.lists
-            .getByTitle(AppConstants.ListName)
-            .fields.addMultilineText("ErrorDetails"),
-          sp.web.lists
-            .getByTitle(AppConstants.ListName)
-            .fields.addMultilineText("JSON"),
-          sp.web.lists
-            .getByTitle(AppConstants.ListName)
-            .fields.addNumber("ProgrammeID"),
-          sp.web.lists
-            .getByTitle(AppConstants.ListName)
-            .fields.addNumber("StatusCode")
-        ])
-          .then(res => {
-            AppConstants.ListCreated = true;
-            this.CheckQueue();
-          })
-          .catch(err => {
-            AppConstants.ListCreated = false;
+      .then(async res => {
+        console.log("List Created By the Rest Api");
+        console.log(res, "res");
+        alert("List Created");
+        sp.web.lists
+          .getByTitle(AppConstants.ListName)
+          .fields.addMultilineText("PageURL")
+          .then((res: any) => {
+            alert("Multiline Added");
           });
       })
       .catch(err => {});
@@ -87,13 +55,16 @@ export default class LoggerHelper {
 
   public async Initalize(listName: any) {
     AppConstants.ListName = listName;
+    console.log("Initialize Called");
     // Processing for If List Exist or Not
     await sp.web.lists.ensure(listName).then((value: ListEnsureResult) => {
       if (value.created) {
         console.log("List already Exist");
+        alert("List Already Exist");
         AppConstants.ListCreated = true;
       } else {
         AppConstants.ListCreated = false;
+        alert("Going to Create a List with this Name");
         console.log("Going to Create a List with this Name");
         this.CreateList();
       }
