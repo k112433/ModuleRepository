@@ -29,66 +29,56 @@ export default class LoggerHelper {
   }
 
   private async CreateListColumns() {
-    alert("Creating Columns");
     sp.web.lists
       .getByTitle(AppConstants.ListName)
       .fields.addMultilineText("PageURL")
       .then((a: any) => {
         ////
-        alert("PageURL");
+
         sp.web.lists
           .getByTitle(AppConstants.ListName)
           .fields.addText("FileName")
           .then((a: any) => {
-            alert("FileName");
             ////
             sp.web.lists
               .getByTitle(AppConstants.ListName)
               .fields.addText("Method")
               .then((a: any) => {
-                alert("Method");
                 ////
                 sp.web.lists
                   .getByTitle(AppConstants.ListName)
                   .fields.addUser("User", 0)
                   .then((a: any) => {
-                    alert("User");
                     ////
                     sp.web.lists
                       .getByTitle(AppConstants.ListName)
                       .fields.addChoice("Extype", ["Info", "Error", "Warn"])
                       .then((a: any) => {
-                        alert("Extype");
                         ////
                         sp.web.lists
                           .getByTitle(AppConstants.ListName)
                           .fields.addMultilineText("ErrorMessage")
                           .then((a: any) => {
-                            alert("ErrorMessage");
                             ////
                             sp.web.lists
                               .getByTitle(AppConstants.ListName)
                               .fields.addMultilineText("ErrorDetails")
                               .then((a: any) => {
-                                alert("ErrorDetails");
                                 ////
                                 sp.web.lists
                                   .getByTitle(AppConstants.ListName)
                                   .fields.addMultilineText("JSON")
                                   .then((a: any) => {
-                                    alert("JSON");
                                     ////
                                     sp.web.lists
                                       .getByTitle(AppConstants.ListName)
                                       .fields.addNumber("ProgrammeID")
                                       .then((a: any) => {
-                                        alert("ProgrammeID");
                                         ////
                                         sp.web.lists
                                           .getByTitle(AppConstants.ListName)
                                           .fields.addNumber("StatusCode")
                                           .then((a: any) => {
-                                            alert("StatusCode");
                                             AppConstants.ListCreated = true;
                                             this.CheckQueue();
                                           });
@@ -135,11 +125,11 @@ export default class LoggerHelper {
     // Processing for If List Exist or Not
     await sp.web.lists.ensure(listName).then((value: ListEnsureResult) => {
       if (value.created) {
-        alert("List has been Created");
+        console.log("List Created");
         this.CreateListColumns();
       } else {
         AppConstants.ListCreated = true;
-        alert("List was Created Aready already ");
+        this.CheckQueue();
         console.log("Going to Create a List with this Name");
       }
     });
