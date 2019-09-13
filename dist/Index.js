@@ -67,8 +67,32 @@ var LoggerHelper = /** @class */ (function () {
                 sp_pnp_js_1.sp.web.lists
                     .getByTitle(AppConstants.ListName)
                     .fields.addMultilineText("PageURL")
-                    .then(function (res) {
-                    alert("Multiline Added");
+                    .then(function (a) {
+                    ////
+                    alert("PageURL");
+                    sp_pnp_js_1.sp.web.lists
+                        .getByTitle(AppConstants.ListName)
+                        .fields.addText("FileName")
+                        .then(function (a) {
+                        alert("FileName");
+                        ////
+                        sp_pnp_js_1.sp.web.lists
+                            .getByTitle(AppConstants.ListName)
+                            .fields.addText("Method")
+                            .then(function (a) {
+                            alert("Method");
+                            ////
+                            sp_pnp_js_1.sp.web.lists
+                                .getByTitle(AppConstants.ListName)
+                                .fields.addUser("User", 0)
+                                .then(function (a) {
+                                alert("User");
+                            });
+                            //
+                        });
+                        //
+                    });
+                    //
                 });
                 return [2 /*return*/];
             });
@@ -97,10 +121,10 @@ var LoggerHelper = /** @class */ (function () {
                                     _this.CreateListColumns();
                                 }
                                 else {
+                                    AppConstants.ListCreated = true;
                                     alert("List was Created Aready already ");
                                     console.log("Going to Create a List with this Name");
                                 }
-                                AppConstants.ListCreated = true;
                             })];
                     case 1:
                         // Processing for If List Exist or Not

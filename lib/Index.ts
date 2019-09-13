@@ -33,9 +33,77 @@ export default class LoggerHelper {
     sp.web.lists
       .getByTitle(AppConstants.ListName)
       .fields.addMultilineText("PageURL")
-      .then((res: any) => {
-        alert("Multiline Added");
+      .then((a: any) => {
+        ////
+        alert("PageURL");
+        sp.web.lists
+          .getByTitle(AppConstants.ListName)
+          .fields.addText("FileName")
+          .then((a: any) => {
+            alert("FileName");
+            ////
+            sp.web.lists
+              .getByTitle(AppConstants.ListName)
+              .fields.addText("Method")
+              .then((a: any) => {
+                alert("Method");
+                ////
+                sp.web.lists
+                  .getByTitle(AppConstants.ListName)
+                  .fields.addUser("User", 0)
+                  .then((a: any) => {
+                    alert("User");
+                  });
+
+                //
+              });
+
+            //
+          });
+
+        //
       });
+
+    // sp.web.lists
+    //   .getByTitle(AppConstants.ListName)
+    //   .fields.addMultilineText("PageURL")
+    //   .then((res: any) => {
+    //     alert("Multiline Added");
+    //   });
+    // Promise.all([
+    //   sp.web.lists
+    //     .getByTitle(AppConstants.ListName)
+    //     .fields.addMultilineText("PageURL"),
+    //   sp.web.lists.getByTitle(AppConstants.ListName).fields.addText("FileName"),
+    //   sp.web.lists.getByTitle(AppConstants.ListName).fields.addText("Method"),
+    //   sp.web.lists.getByTitle(AppConstants.ListName).fields.addUser("User", 0),
+    //   sp.web.lists
+    //     .getByTitle(AppConstants.ListName)
+    //     .fields.addChoice("Extype", ["Info", "Error", "Warn"]),
+    //   sp.web.lists
+    //     .getByTitle(AppConstants.ListName)
+    //     .fields.addMultilineText("ErrorMessage"),
+    //   sp.web.lists
+    //     .getByTitle(AppConstants.ListName)
+    //     .fields.addMultilineText("ErrorDetails"),
+    //   sp.web.lists
+    //     .getByTitle(AppConstants.ListName)
+    //     .fields.addMultilineText("JSON"),
+    //   sp.web.lists
+    //     .getByTitle(AppConstants.ListName)
+    //     .fields.addNumber("ProgrammeID"),
+    //   sp.web.lists
+    //     .getByTitle(AppConstants.ListName)
+    //     .fields.addNumber("StatusCode")
+    // ])
+    //   .then(res => {
+    //     AppConstants.ListCreated = true;
+    //     this.CheckQueue();
+    //   })
+    //   .catch(err => {
+    //     AppConstants.ListCreated = false;
+    //     console.log(err);
+    //   });
   }
 
   private CheckQueue() {
@@ -53,14 +121,12 @@ export default class LoggerHelper {
     await sp.web.lists.ensure(listName).then((value: ListEnsureResult) => {
       if (value.created) {
         alert("List has been Created");
-
         this.CreateListColumns();
       } else {
+        AppConstants.ListCreated = true;
         alert("List was Created Aready already ");
         console.log("Going to Create a List with this Name");
       }
-
-      AppConstants.ListCreated = true;
     });
   }
 }
