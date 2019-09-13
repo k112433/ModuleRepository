@@ -17,7 +17,7 @@ export interface ILogger {
     FileName?: string;
     Method?: string;
     UserId?: any;
-    ExType?: any;
+    Extype?: any;
     ErrorMessage?: string;
     ErrorDetails?: string;
     JSON?: string;
