@@ -8,7 +8,7 @@ export default class LoggerHelper {
     static listName: string;
     constructor();
     Log(item: ILogger): void;
-    private CreateList;
+    private CreateListColumns;
     private CheckQueue;
     Initalize(listName: any): Promise<void>;
 }

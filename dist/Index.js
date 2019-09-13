@@ -60,32 +60,17 @@ var LoggerHelper = /** @class */ (function () {
             }
         }
     };
-    LoggerHelper.prototype.CreateList = function () {
+    LoggerHelper.prototype.CreateListColumns = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, sp_pnp_js_1.sp.web.lists
-                            .add(AppConstants.ListName)
-                            .then(function (res) { return __awaiter(_this, void 0, void 0, function () {
-                            return __generator(this, function (_a) {
-                                console.log("List Created By the Rest Api");
-                                console.log(res, "res");
-                                alert("List Created");
-                                sp_pnp_js_1.sp.web.lists
-                                    .getByTitle(AppConstants.ListName)
-                                    .fields.addMultilineText("PageURL")
-                                    .then(function (res) {
-                                    alert("Multiline Added");
-                                });
-                                return [2 /*return*/];
-                            });
-                        }); })
-                            .catch(function (err) { })];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
+                alert("Creating Columns");
+                sp_pnp_js_1.sp.web.lists
+                    .getByTitle(AppConstants.ListName)
+                    .fields.addMultilineText("PageURL")
+                    .then(function (res) {
+                    alert("Multiline Added");
+                });
+                return [2 /*return*/];
             });
         });
     };
@@ -108,16 +93,14 @@ var LoggerHelper = /** @class */ (function () {
                         // Processing for If List Exist or Not
                         return [4 /*yield*/, sp_pnp_js_1.sp.web.lists.ensure(listName).then(function (value) {
                                 if (value.created) {
-                                    console.log("List already Exist");
-                                    alert("List Already Exist");
-                                    AppConstants.ListCreated = true;
+                                    alert("List has been Created");
+                                    _this.CreateListColumns();
                                 }
                                 else {
-                                    AppConstants.ListCreated = false;
-                                    alert("Going to Create a List with this Name");
+                                    alert("List was Created Aready already ");
                                     console.log("Going to Create a List with this Name");
-                                    _this.CreateList();
                                 }
+                                AppConstants.ListCreated = true;
                             })];
                     case 1:
                         // Processing for If List Exist or Not

@@ -28,21 +28,14 @@ export default class LoggerHelper {
     }
   }
 
-  private async CreateList() {
-    await sp.web.lists
-      .add(AppConstants.ListName)
-      .then(async res => {
-        console.log("List Created By the Rest Api");
-        console.log(res, "res");
-        alert("List Created");
-        sp.web.lists
-          .getByTitle(AppConstants.ListName)
-          .fields.addMultilineText("PageURL")
-          .then((res: any) => {
-            alert("Multiline Added");
-          });
-      })
-      .catch(err => {});
+  private async CreateListColumns() {
+    alert("Creating Columns");
+    sp.web.lists
+      .getByTitle(AppConstants.ListName)
+      .fields.addMultilineText("PageURL")
+      .then((res: any) => {
+        alert("Multiline Added");
+      });
   }
 
   private CheckQueue() {
@@ -59,15 +52,15 @@ export default class LoggerHelper {
     // Processing for If List Exist or Not
     await sp.web.lists.ensure(listName).then((value: ListEnsureResult) => {
       if (value.created) {
-        console.log("List already Exist");
-        alert("List Already Exist");
-        AppConstants.ListCreated = true;
+        alert("List has been Created");
+
+        this.CreateListColumns();
       } else {
-        AppConstants.ListCreated = false;
-        alert("Going to Create a List with this Name");
+        alert("List was Created Aready already ");
         console.log("Going to Create a List with this Name");
-        this.CreateList();
       }
+
+      AppConstants.ListCreated = true;
     });
   }
 }
