@@ -62,6 +62,7 @@ var LoggerHelper = /** @class */ (function () {
     };
     LoggerHelper.prototype.CreateListColumns = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
                 alert("Creating Columns");
                 sp_pnp_js_1.sp.web.lists
@@ -87,6 +88,56 @@ var LoggerHelper = /** @class */ (function () {
                                 .fields.addUser("User", 0)
                                 .then(function (a) {
                                 alert("User");
+                                ////
+                                sp_pnp_js_1.sp.web.lists
+                                    .getByTitle(AppConstants.ListName)
+                                    .fields.addChoice("Extype", ["Info", "Error", "Warn"])
+                                    .then(function (a) {
+                                    alert("Extype");
+                                    ////
+                                    sp_pnp_js_1.sp.web.lists
+                                        .getByTitle(AppConstants.ListName)
+                                        .fields.addMultilineText("ErrorMessage")
+                                        .then(function (a) {
+                                        alert("ErrorMessage");
+                                        ////
+                                        sp_pnp_js_1.sp.web.lists
+                                            .getByTitle(AppConstants.ListName)
+                                            .fields.addMultilineText("ErrorDetails")
+                                            .then(function (a) {
+                                            alert("ErrorDetails");
+                                            ////
+                                            sp_pnp_js_1.sp.web.lists
+                                                .getByTitle(AppConstants.ListName)
+                                                .fields.addMultilineText("JSON")
+                                                .then(function (a) {
+                                                alert("JSON");
+                                                ////
+                                                sp_pnp_js_1.sp.web.lists
+                                                    .getByTitle(AppConstants.ListName)
+                                                    .fields.addNumber("ProgrammeID")
+                                                    .then(function (a) {
+                                                    alert("ProgrammeID");
+                                                    ////
+                                                    sp_pnp_js_1.sp.web.lists
+                                                        .getByTitle(AppConstants.ListName)
+                                                        .fields.addNumber("StatusCode")
+                                                        .then(function (a) {
+                                                        alert("StatusCode");
+                                                        AppConstants.ListCreated = true;
+                                                        _this.CheckQueue();
+                                                    });
+                                                    //
+                                                });
+                                                //
+                                            });
+                                            //
+                                        });
+                                        //
+                                    });
+                                    //
+                                });
+                                //
                             });
                             //
                         });
