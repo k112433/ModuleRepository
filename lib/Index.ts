@@ -1,9 +1,9 @@
 import * as pluralize from "pluralize";
-import { sp } from "sp-pnp-js";
+import { sp, ListEnsureResult } from "sp-pnp-js";
 
 /**
  * @Method: Returns the plural form of any noun.
- * @Param {string}cls
+ * @Param {string}
  * @Return {string}
  */
 
@@ -32,6 +32,13 @@ export default class LoggerHelper {
   public Initalize(listName: any) {
     AppConstants.ListName = listName;
     // Processing for If List Exist or Not
+    sp.web.lists.ensure(listName).then((value: ListEnsureResult) => {
+      if (value.created) {
+        console.log("List already Exist");
+      } else {
+        console.log("Going to Create a List with this Name");
+      }
+    });
   }
 }
 
