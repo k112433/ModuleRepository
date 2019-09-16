@@ -1,14 +1,10 @@
-/**
- * @Method: Returns the plural form of any noun.
- * @Param {string}
- * @Return {string}
- */
 export default class LoggerHelper {
     private _appConstants;
     static listName: string;
     constructor();
     Log(item: ILogger): void;
     private CreateListColumns;
+    private addAllFieldsToView;
     private CheckQueue;
     Initalize(listName: any): Promise<void>;
 }

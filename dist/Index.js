@@ -36,11 +36,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var sp_pnp_js_1 = require("sp-pnp-js");
-/**
- * @Method: Returns the plural form of any noun.
- * @Param {string}
- * @Return {string}
- */
 var LoggerHelper = /** @class */ (function () {
     function LoggerHelper() {
         this._appConstants = AppConstants.Instance();
@@ -62,57 +57,71 @@ var LoggerHelper = /** @class */ (function () {
     };
     LoggerHelper.prototype.CreateListColumns = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var defaultView, allFields;
             var _this = this;
             return __generator(this, function (_a) {
+                defaultView = sp_pnp_js_1.sp.web.lists.getByTitle(AppConstants.ListName).defaultView;
+                allFields = [];
                 sp_pnp_js_1.sp.web.lists
                     .getByTitle(AppConstants.ListName)
                     .fields.addMultilineText("PageURL")
                     .then(function (a) {
+                    allFields.push("PageURL");
                     ////
                     sp_pnp_js_1.sp.web.lists
                         .getByTitle(AppConstants.ListName)
                         .fields.addText("FileName")
                         .then(function (a) {
+                        allFields.push("FileName");
                         ////
                         sp_pnp_js_1.sp.web.lists
                             .getByTitle(AppConstants.ListName)
                             .fields.addText("Method")
                             .then(function (a) {
+                            allFields.push("Method");
                             ////
                             sp_pnp_js_1.sp.web.lists
                                 .getByTitle(AppConstants.ListName)
                                 .fields.addUser("User", 0)
                                 .then(function (a) {
+                                allFields.push("User");
                                 ////
                                 sp_pnp_js_1.sp.web.lists
                                     .getByTitle(AppConstants.ListName)
                                     .fields.addChoice("Extype", ["Info", "Error", "Warn"])
                                     .then(function (a) {
+                                    allFields.push("Extype");
                                     ////
                                     sp_pnp_js_1.sp.web.lists
                                         .getByTitle(AppConstants.ListName)
                                         .fields.addMultilineText("ErrorMessage")
                                         .then(function (a) {
+                                        allFields.push("ErrorMessage");
                                         ////
                                         sp_pnp_js_1.sp.web.lists
                                             .getByTitle(AppConstants.ListName)
                                             .fields.addMultilineText("ErrorDetails")
                                             .then(function (a) {
+                                            allFields.push("ErrorDetails");
                                             ////
                                             sp_pnp_js_1.sp.web.lists
                                                 .getByTitle(AppConstants.ListName)
                                                 .fields.addMultilineText("JSON")
                                                 .then(function (a) {
+                                                allFields.push("JSON");
                                                 ////
                                                 sp_pnp_js_1.sp.web.lists
                                                     .getByTitle(AppConstants.ListName)
                                                     .fields.addNumber("ProgrammeID")
                                                     .then(function (a) {
+                                                    allFields.push("ProgrammeID");
                                                     ////
                                                     sp_pnp_js_1.sp.web.lists
                                                         .getByTitle(AppConstants.ListName)
                                                         .fields.addNumber("StatusCode")
                                                         .then(function (a) {
+                                                        allFields.push("StatusCode");
+                                                        _this.addAllFieldsToView(defaultView, allFields);
                                                         AppConstants.ListCreated = true;
                                                         _this.CheckQueue();
                                                     });
@@ -137,6 +146,15 @@ var LoggerHelper = /** @class */ (function () {
                 return [2 /*return*/];
             });
         });
+    };
+    LoggerHelper.prototype.addAllFieldsToView = function (defView, allFields) {
+        var batch = sp_pnp_js_1.sp.web.createBatch();
+        defView.fields.inBatch(batch).removeAll();
+        allFields.forEach(function (fieldName) {
+            defView.fields.inBatch(batch).add(fieldName);
+            batch.execute().then(function (_) { return console.log('Done'); }).catch(console.log);
+        });
+        batch.execute().then(function (_) { return console.log('Done'); }).catch(console.log);
     };
     LoggerHelper.prototype.CheckQueue = function () {
         var obj;
