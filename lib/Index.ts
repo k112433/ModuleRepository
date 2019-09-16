@@ -1,6 +1,10 @@
 import * as pluralize from "pluralize";
 import { sp, ListEnsureResult, App } from "sp-pnp-js";
 import { View } from "sp-pnp-js/lib/sharepoint/views";
+import "core-js/es6/number";
+import "core-js/es6/array";
+import "core-js/es7/object";
+import "polyfill-array-includes";
 
 export default class LoggerHelper {
   private _appConstants: AppConstants;
@@ -137,7 +141,7 @@ export default class LoggerHelper {
         .then(r => {
           if (index == allFields.length - 1) index = -1;
           else index = index + 1;
-          this.addFieldsToView(allFields, index,defView);
+          this.addFieldsToView(allFields, index, defView);
         })
         .catch(err => {});
     }
