@@ -1,6 +1,6 @@
 import * as pluralize from "pluralize";
 import { sp, ListEnsureResult, App } from "sp-pnp-js";
-
+import { View } from "sp-pnp-js/lib/sharepoint/views";
 
 export default class LoggerHelper {
   private _appConstants: AppConstants;
@@ -24,8 +24,7 @@ export default class LoggerHelper {
   }
 
   private async CreateListColumns() {
-    let defaultView = sp.web.lists.getByTitle(AppConstants.ListName).defaultView;
-    let allFields:string[]=[];
+    let allFields: string[] = [];
     sp.web.lists
       .getByTitle(AppConstants.ListName)
       .fields.addMultilineText("PageURL")
@@ -87,8 +86,14 @@ export default class LoggerHelper {
                                           .then((a: any) => {
                                             allFields.push("StatusCode");
 
-
-                                            this.addAllFieldsToView(defaultView,allFields);
+                                            let defaultView: View = sp.web.lists.getByTitle(
+                                              AppConstants.ListName
+                                            ).defaultView;
+                                            this.addFieldsToView(
+                                              allFields,
+                                              0,
+                                              defaultView
+                                            );
                                             AppConstants.ListCreated = true;
                                             this.CheckQueue();
                                           });
@@ -121,15 +126,22 @@ export default class LoggerHelper {
       });
   }
 
-  private async addAllFieldsToView(defView:any,allFields:string[]){
-    const batch = sp.web.createBatch();
-    defView.fields.inBatch(batch).removeAll();
-    allFields.forEach(fieldName => {
-    defView.fields.inBatch(batch).add(fieldName);
-  });
-
-  await batch.execute().then(_ => console.log('Done')).catch(console.log);
-}
+  private async addFieldsToView(
+    allFields: string[],
+    index: number,
+    defView: View
+  ) {
+    if (index != -1) {
+      defView.fields
+        .add(allFields[index])
+        .then(r => {
+          if (index == allFields.length - 1) index = -1;
+          else index = index + 1;
+          this.addFieldsToView(allFields, index,defView);
+        })
+        .catch(err => {});
+    }
+  }
 
   private CheckQueue() {
     let obj: any;

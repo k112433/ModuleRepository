@@ -4,7 +4,7 @@ export default class LoggerHelper {
     constructor();
     Log(item: ILogger): void;
     private CreateListColumns;
-    private addAllFieldsToView;
+    private addFieldsToView;
     private CheckQueue;
     Initalize(listName: any): Promise<void>;
 }

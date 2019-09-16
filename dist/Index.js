@@ -57,10 +57,9 @@ var LoggerHelper = /** @class */ (function () {
     };
     LoggerHelper.prototype.CreateListColumns = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var defaultView, allFields;
+            var allFields;
             var _this = this;
             return __generator(this, function (_a) {
-                defaultView = sp_pnp_js_1.sp.web.lists.getByTitle(AppConstants.ListName).defaultView;
                 allFields = [];
                 sp_pnp_js_1.sp.web.lists
                     .getByTitle(AppConstants.ListName)
@@ -121,7 +120,8 @@ var LoggerHelper = /** @class */ (function () {
                                                         .fields.addNumber("StatusCode")
                                                         .then(function (a) {
                                                         allFields.push("StatusCode");
-                                                        _this.addAllFieldsToView(defaultView, allFields);
+                                                        var defaultView = sp_pnp_js_1.sp.web.lists.getByTitle(AppConstants.ListName).defaultView;
+                                                        _this.addFieldsToView(allFields, 0, defaultView);
                                                         AppConstants.ListCreated = true;
                                                         _this.CheckQueue();
                                                     });
@@ -147,22 +147,23 @@ var LoggerHelper = /** @class */ (function () {
             });
         });
     };
-    LoggerHelper.prototype.addAllFieldsToView = function (defView, allFields) {
+    LoggerHelper.prototype.addFieldsToView = function (allFields, index, defView) {
         return __awaiter(this, void 0, void 0, function () {
-            var batch;
+            var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        batch = sp_pnp_js_1.sp.web.createBatch();
-                        defView.fields.inBatch(batch).removeAll();
-                        allFields.forEach(function (fieldName) {
-                            defView.fields.inBatch(batch).add(fieldName);
-                        });
-                        return [4 /*yield*/, batch.execute().then(function (_) { return console.log('Done'); }).catch(console.log)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
+                if (index != -1) {
+                    defView.fields
+                        .add(allFields[index])
+                        .then(function (r) {
+                        if (index == allFields.length - 1)
+                            index = -1;
+                        else
+                            index = index + 1;
+                        _this.addFieldsToView(allFields, index, defView);
+                    })
+                        .catch(function (err) { });
                 }
+                return [2 /*return*/];
             });
         });
     };
