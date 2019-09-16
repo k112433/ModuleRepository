@@ -148,13 +148,23 @@ var LoggerHelper = /** @class */ (function () {
         });
     };
     LoggerHelper.prototype.addAllFieldsToView = function (defView, allFields) {
-        var batch = sp_pnp_js_1.sp.web.createBatch();
-        defView.fields.inBatch(batch).removeAll();
-        allFields.forEach(function (fieldName) {
-            defView.fields.inBatch(batch).add(fieldName);
-            batch.execute().then(function (_) { return console.log('Done'); }).catch(console.log);
+        return __awaiter(this, void 0, void 0, function () {
+            var batch;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        batch = sp_pnp_js_1.sp.web.createBatch();
+                        defView.fields.inBatch(batch).removeAll();
+                        allFields.forEach(function (fieldName) {
+                            defView.fields.inBatch(batch).add(fieldName);
+                        });
+                        return [4 /*yield*/, batch.execute().then(function (_) { return console.log('Done'); }).catch(console.log)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
         });
-        batch.execute().then(function (_) { return console.log('Done'); }).catch(console.log);
     };
     LoggerHelper.prototype.CheckQueue = function () {
         var obj;

@@ -86,6 +86,8 @@ export default class LoggerHelper {
                                           .fields.addNumber("StatusCode")
                                           .then((a: any) => {
                                             allFields.push("StatusCode");
+
+
                                             this.addAllFieldsToView(defaultView,allFields);
                                             AppConstants.ListCreated = true;
                                             this.CheckQueue();
@@ -119,16 +121,15 @@ export default class LoggerHelper {
       });
   }
 
-  private addAllFieldsToView(defView:any,allFields:string[]){
+  private async addAllFieldsToView(defView:any,allFields:string[]){
     const batch = sp.web.createBatch();
     defView.fields.inBatch(batch).removeAll();
     allFields.forEach(fieldName => {
     defView.fields.inBatch(batch).add(fieldName);
-    batch.execute().then(_ => console.log('Done')).catch(console.log);
-});
+  });
 
-batch.execute().then(_ => console.log('Done')).catch(console.log);
-  }
+  await batch.execute().then(_ => console.log('Done')).catch(console.log);
+}
 
   private CheckQueue() {
     let obj: any;
