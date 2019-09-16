@@ -1,7 +1,7 @@
 {
-  "name": "admuuralize",
-  "version": "1.0.15",
-  "description": "A Node.js module that returns the plural form of any noun",
+  "name": "custom_utility",
+  "version": "1.0.0",
+  "description": "A Node.js module that provides custom utilities like logging in sharepoint",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/k112433/ModuleRepository.git"
+    "url": "git+https://github.com/memona008/ModuleRepository.git"
   },
   "keywords": [],
-  "author": "AdnanMustafa <adnanmustafa1994@yahoo.com>",
+  "author": "MemonaSultan <memonasultan54@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/k112433/ModuleRepository/issues"
+    "url": "https://github.com/memona008/ModuleRepository/issues"
   },
-  "homepage": "https://github.com/k112433/ModuleRepository",
+  "homepage": "https://github.com/memona008/ModuleRepository",
   "devDependencies": {
     "typescript": "^2.5.3"
   },
