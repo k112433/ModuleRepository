@@ -7,13 +7,13 @@ SPFX_Logger is a library which is used to log into your sharepoint through code.
 Use NPM to install this package
 
 ```bash
-npm install custom_utility
+npm install spfx_logger
 ```
 
 ## Usage
 
 ```node
-import LoggerHelper from 'custom_utility';
+import LoggerHelper from 'spfx_logger';
 
 let _logger = new LoggerHelper();
 let listName = "custom_log_list";
