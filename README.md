@@ -22,12 +22,11 @@ import LoggerHelper from 'spfx_logger';
 
 let _logger = new LoggerHelper();
 let listName = "custom_log_list";
-_logger.Initialize(listName);
+_logger.Initalize(listName);
 
 /* Note: If list with this name doesnt exist in SharePoint then Initialize() method will
-    make a new list in your sharePoint based on ILogger interface info
-    
-    Try to choose unique name which doesn't exist in your sharepoint
+  make a new list in your sharePoint based on ILogger interface info
+  Try to choose unique name which doesn't exist in your sharepoint
 */
 
 
@@ -35,7 +34,7 @@ _logger.Initialize(listName);
 
 // After logger initialization you can Log anything in your sharepoint list
 let obj:ILogger = {};
-let obj = {
+obj = {
 ErrorMessage: "It is error message",
 ErrorDetails: "These are error details",
 Extype: "Error",
@@ -55,7 +54,6 @@ _logger.Log(obj);
 ## Interface 
 ```node
 /* object should of the following interface ILogger
-
 Note: All columns are nullable 
  */
 interface ILogger {
