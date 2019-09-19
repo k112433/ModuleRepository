@@ -1,13 +1,18 @@
-# SPFX_Logger
+# spfx_logger
 
-SPFX_Logger is a library which is used to log into your sharepoint through code. 
+spfx_logger is a library which is used to log into your sharepoint through code. 
 
 ## Installation
 
-Use NPM to install this package
+Use npm to install this package
 
 ```bash
 npm install spfx_logger
+```
+## Latest Version
+
+```bash
+1.0.6
 ```
 
 ## Usage
@@ -19,7 +24,17 @@ let _logger = new LoggerHelper();
 let listName = "custom_log_list";
 _logger.Initialize(listName);
 
+/* Note: If list with this name doesnt exist in SharePoint then Initialize() method will
+    make a new list in your sharePoint based on ILogger interface info
+    
+    Try to choose unique name which doesn't exist in your sharepoint
+*/
+
+
+
+
 // After logger initialization you can Log anything in your sharepoint list
+let obj:ILogger = {};
 let obj = {
 ErrorMessage: "It is error message",
 ErrorDetails: "These are error details",
@@ -34,11 +49,15 @@ Extype: "Error",
 }
 
 _logger.Log(obj);
+// this method will log your error in the initialized List 
 ```
 
 ## Interface 
 ```node
-/* object should of the following interface ILogger */
+/* object should of the following interface ILogger
+
+Note: All columns are nullable 
+ */
 interface ILogger {
   PageURL?: string;
   FileName?: string;
