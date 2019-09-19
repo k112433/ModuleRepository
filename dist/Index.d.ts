@@ -1,3 +1,7 @@
+import "core-js/es6/number";
+import "core-js/es6/array";
+import "core-js/es7/object";
+import "polyfill-array-includes";
 export default class LoggerHelper {
     private _appConstants;
     static listName: string;

@@ -1,6 +1,6 @@
 {
-  "name": "custom_utility",
-  "version": "1.0.4",
+  "name": "spfx_logger",
+  "version": "1.0.5",
   "description": "A Node.js module that provides custom utilities like logging in sharepoint",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,9 +23,7 @@
   },
   "dependencies": {
     "@microsoft/sp-polyfills": "^1.9.1",
-    "@types/pluralize": "0.0.27",
     "babel-polyfill": "^6.26.0",
-    "pluralize": "^7.0.0",
     "polyfill-array-includes": "^2.0.0",
     "sp-pnp-js": "^3.0.10"
   }

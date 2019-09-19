@@ -36,6 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var sp_pnp_js_1 = require("sp-pnp-js");
+require("core-js/es6/number");
+require("core-js/es6/array");
+require("core-js/es7/object");
+require("polyfill-array-includes");
 var LoggerHelper = /** @class */ (function () {
     function LoggerHelper() {
         this._appConstants = AppConstants.Instance();
