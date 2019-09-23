@@ -1,6 +1,6 @@
 {
   "name": "spfx_logger",
-  "version": "1.0.6",
+  "version": "1.0.0",
   "description": "A Node.js module that provides custom utilities like logging in sharepoint",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
