@@ -9,11 +9,6 @@ Use npm to install this package
 ```bash
 npm install spfx_logger
 ```
-## Latest Version
-
-```bash
-1.0.6
-```
 
 ## Usage
 
@@ -21,12 +16,11 @@ npm install spfx_logger
 import LoggerHelper from 'spfx_logger';
 
 let _logger = new LoggerHelper();
-let listName = "custom_log_list";
-_logger.Initalize(listName);
 
-/* Note: If list with this name doesnt exist in SharePoint then Initialize() method will
-  make a new list in your sharePoint based on ILogger interface info
-  Try to choose unique name which doesn't exist in your sharepoint
+_logger.Initalize("custom_log_list");
+
+/* Note: If list with said name doesn't exist Initilize() method will 
+create a new list in SharePoint for Logs
 */
 
 
@@ -53,8 +47,8 @@ _logger.Log(obj);
 
 ## Interface 
 ```node
-/* object should of the following interface ILogger
-Note: All columns are nullable 
+/* The interface which is used to store the Log Object is ILogger
+Note: All columns are optional 
  */
 interface ILogger {
   PageURL?: string;
