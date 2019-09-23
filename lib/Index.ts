@@ -1,4 +1,3 @@
-import * as pluralize from "pluralize";
 import { sp, ListEnsureResult, App } from "sp-pnp-js";
 import { View } from "sp-pnp-js/lib/sharepoint/views";
 import "core-js/es6/number";
